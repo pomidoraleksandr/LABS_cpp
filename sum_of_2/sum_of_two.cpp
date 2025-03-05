@@ -1,30 +1,40 @@
 #include <iostream>
 #include <chrono>
-int lsum(int N, int num){
-    int *numbers{new int[N]{0}};
+#include <random>
+#include <fstream>
+int lsum(int arr[], int N, int num){
     for (int i = 0; i < N; i++){
-        for(int j = 0;j < N; j++){
-            if (numbers[i]+numbers[j] == num && (numbers[i] != numbers[j])){
-                return numbers[i], numbers[j];
+        for(int j = i + 1;j < N; j++){
+            if (arr[i]+arr[j] == num && (arr[i] != arr[j])){
+                return arr[i], arr[j];
             }
         }
     }   
     return -1;
 }
-int main(){
-    int N, key;
-    std::cin>>N >> key;
-    auto begin = std::chrono::steady_clock::now();
-    for (unsigned cnt = 100000; cnt != 0; --cnt)
-        lsum(N, key);
-    auto end=std::chrono::steady_clock::now();
-    auto time_span =std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
 
-    std::cout<<"\n\n";
-    std::cout<<time_span.count()<<std::endl;
-
-    
-
-    return 0;
-
+int* create(int length) {
+    int* a = new int[length];
+    for (int i = 0; i < length; ++i) {
+        a[i] = i; 
+    }
+    return a;
 }
+
+
+int main(){
+    std :: ofstream outFile("long_sum.txt");
+    for ( unsigned cnt = 1; cnt != 101 ;  ++cnt ){
+        int* arr = create(cnt * 10);
+        auto begin = std :: chrono :: steady_clock :: now ( ) ;
+        for (unsigned i = 1; i != 1000; ++i) {
+           lsum(arr, cnt * 10, -1);
+         }
+        auto end = std :: chrono :: steady_clock :: now ( ) ;
+        auto time_span = std :: chrono :: duration_cast<std:: chrono :: microseconds >(end - begin ) ;
+        outFile << cnt*10 << " " <<  time_span . count ( ) << std :: endl ;
+        delete [] arr;
+    }
+    outFile.close();
+    return 0;
+    }

@@ -1,17 +1,19 @@
 #include <iostream>
 #include <chrono>
-int fsum(int N, int num){
-    int *numbers{new int[N]{0}}, k = 0, r = N-1;
+#include <random>
+#include <fstream>
+int fsum(int arr[], int N, int num){
+    int  k = 0, r = N-1;
     for(int i = 0; i<N; i++){
-        if(numbers[k]+numbers[r]> num){
+        if(arr[k]+arr[r]> num){
             r = r - 1;
         }
-        if (numbers[k]+numbers[r] < num){
+        if (arr[k]+arr[r] < num){
             k = k + 1;
         }
-        if (numbers[k]+numbers[r] == num && (numbers[k] != numbers[r])){
+        if (arr[k]+arr[r] == num && (arr[k] != arr[r])){
 
-            return numbers[k], numbers[r];
+            return arr[k], arr[r];
         }
         
 
@@ -19,20 +21,31 @@ int fsum(int N, int num){
     }
     return -1;
 }
-int main(){
-    int N, key;
-    std::cin>>N >> key;
-    auto begin = std::chrono::steady_clock::now();
-    for (unsigned cnt = 100000; cnt != 0; --cnt)
-        fsum(N, key);
-    auto end=std::chrono::steady_clock::now();
-    auto time_span =std::chrono::duration_cast<std::chrono::milliseconds>(end-begin);
-
-    std::cout<<"\n\n";
-    std::cout<<time_span.count()<<std::endl;
-
-    
-
-    return 0;
-
+int* create(int length) {
+    int* a = new int[length];
+    for (int i = 0; i < length; ++i) {
+        a[i] = i; 
+    }
+    return a;
 }
+
+
+int main(){
+    unsigned seed = 1001;
+    std::default_random_engine rng(seed);
+    std :: ofstream outFile("fast_sum.txt");
+    for ( unsigned cnt = 1; cnt != 1001 ;  ++cnt ){
+        int* arr = create(cnt * 1000);
+        auto begin = std :: chrono :: steady_clock :: now ( ) ;
+        for (unsigned i = 1; i != 1000; ++i) {
+            std::uniform_int_distribution<unsigned> distr(0, cnt*1000);
+           fsum(arr, cnt * 1000, distr(rng));
+         }
+        auto end = std :: chrono :: steady_clock :: now ( ) ;
+        auto time_span = std :: chrono :: duration_cast<std:: chrono :: microseconds >(end - begin ) ;
+        outFile << cnt*1000 << " " <<  time_span . count ( ) << std :: endl ;
+        delete [] arr;
+    }
+    outFile.close();
+    return 0;
+    }
