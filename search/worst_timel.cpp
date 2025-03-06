@@ -36,6 +36,5 @@ int main(){
         outFile << cnt*10000 << " " <<  time_span . count ( ) << std :: endl ;
         delete [] arr;
     }
-    outFile.close();
     return 0;
     }

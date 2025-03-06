@@ -7,7 +7,7 @@ T=data['count']
 plt.ylim(150,320)
 plt.scatter(N, T,  color='red', label='TB(N)')
 plt.xlabel('Элементов в массиве')
-plt.ylabel('Время выполнения ')
+plt.ylabel('Время выполнения, мс ')
 plt.title('Бинарный поиск(максимальный)')
 plt.grid()
 plt.legend()

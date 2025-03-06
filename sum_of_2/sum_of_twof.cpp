@@ -3,23 +3,16 @@
 #include <random>
 #include <fstream>
 int fsum(int arr[], int N, int num){
-    int  k = 0, r = N-1;
-    for(int i = 0; i<N; i++){
-        if(arr[k]+arr[r]> num){
-            r = r - 1;
+    int l = 0, r = N-1;
+    while(l<r){
+        if (arr[l]+arr[r]== num){
+            return l, r;
         }
-        if (arr[k]+arr[r] < num){
-            k = k + 1;
+        if(arr[l]+arr[r]< num){
+            l++;
         }
-        if (arr[k]+arr[r] == num && (arr[k] != arr[r])){
-
-            return arr[k], arr[r];
-        }
-        
-
-
+        else r--;
     }
-    return -1;
 }
 int* create(int length) {
     int* a = new int[length];
@@ -46,6 +39,5 @@ int main(){
         outFile << cnt*1000 << " " <<  time_span . count ( ) << std :: endl ;
         delete [] arr;
     }
-    outFile.close();
     return 0;
     }

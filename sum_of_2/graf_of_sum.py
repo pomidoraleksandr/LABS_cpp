@@ -7,7 +7,7 @@ T=data['count']
 plt.ylim()
 plt.scatter(N, T,  color='orange', label='T(N)')
 plt.xlabel('Элементов в массиве')
-plt.ylabel('Время выполнения ')
+plt.ylabel('Время выполнения, мс')
 plt.title('Долгая сумма')
 plt.grid()
 plt.legend()

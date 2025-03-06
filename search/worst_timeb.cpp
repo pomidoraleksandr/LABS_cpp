@@ -2,18 +2,15 @@
 #include <chrono>
 #include <fstream>
 
-int b_search(int arr[], int N, int key){
+int b_search(int arr[],int N, int key){
 
         int l_idx = 0, r_idx = N-1;
         while (l_idx<r_idx){
-            int m_idx = (l_idx + r_idx) / 2;
+            int m_idx = l_idx + (r_idx-l_idx) / 2;
             if (key < arr[m_idx]){
                 r_idx = m_idx;
             }
-            else if (arr[m_idx]< key){
-                l_idx = m_idx + 1;
-            }
-            else return m_idx;
+            else l_idx = m_idx + 1;
     
         }
         return -1;
@@ -42,6 +39,5 @@ int main(){
         outFile << cnt*10000 << " " <<  time_span . count ( ) << std :: endl ;
         delete [] arr;
     }
-    outFile.close();
     return 0;
     }

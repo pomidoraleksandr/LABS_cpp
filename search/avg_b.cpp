@@ -6,7 +6,7 @@ int b_search(int arr[], int N, int key){
 
     int l_idx = 0, r_idx = N-1;
     while (l_idx<r_idx){
-        int m_idx = (l_idx + r_idx) / 2;
+        int m_idx = l_idx + (r_idx-l_idx) / 2;
         if (key < arr[m_idx]){
             r_idx = m_idx;
         }
@@ -46,6 +46,5 @@ int main(){
         outFile << cnt*10000 << " " <<  time_span . count ( ) << std :: endl ;
         delete [] arr;
     }
-    outFile.close();
     return 0;
     }
