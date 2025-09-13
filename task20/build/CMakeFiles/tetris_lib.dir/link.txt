@@ -1,0 +1,2 @@
+/usr/bin/ar qc libtetris_lib.a CMakeFiles/tetris_lib.dir/tetris.c.o
+/usr/bin/ranlib libtetris_lib.a

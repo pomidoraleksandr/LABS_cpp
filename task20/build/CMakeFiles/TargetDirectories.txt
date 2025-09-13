@@ -1,0 +1,4 @@
+/home/aleksandr/task2/ASCII-Tetris/build/CMakeFiles/tetris_lib.dir
+/home/aleksandr/task2/ASCII-Tetris/build/CMakeFiles/tetris_app.dir
+/home/aleksandr/task2/ASCII-Tetris/build/CMakeFiles/edit_cache.dir
+/home/aleksandr/task2/ASCII-Tetris/build/CMakeFiles/rebuild_cache.dir
