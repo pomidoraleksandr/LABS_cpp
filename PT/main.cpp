@@ -5,7 +5,6 @@
 class Roll{
 public:
     virtual unsigned roll() = 0;
-    virtual ~Roll() = default;
 };
 
 class Dice : public Roll {
@@ -27,18 +26,16 @@ class ThreeDicePool : public Roll {
 public:
     ThreeDicePool(unsigned max,
                   unsigned seed_1, unsigned seed_2, unsigned seed_3) :
-        dice1(std::make_unique<Dice>(max, seed_1)),
-        dice2(std::make_unique<Dice>(max, seed_2)),
-        dice3(std::make_unique<Dice>(max, seed_3)) { }
+        dice1(max, seed_1),
+        dice2(max, seed_2),
+        dice3(max, seed_3) { }
 
     unsigned roll() override {
-        return dice1->roll() + dice2->roll() + dice3->roll();
+        return dice1.roll() + dice2.roll() + dice3.roll();
     }
 
 private:
-    std::unique_ptr<Dice> dice1;
-    std::unique_ptr<Dice> dice2;
-    std::unique_ptr<Dice> dice3;
+    Dice dice1, dice2, dice3;
 };
 
 double expected_value(Roll &r, unsigned number_of_rolls = 1000) {
